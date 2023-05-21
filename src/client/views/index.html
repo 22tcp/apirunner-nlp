@@ -3,11 +3,6 @@
     <head>
         <meta charset="utf-8">
         <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
     </head>
 
     <body>
@@ -24,7 +19,20 @@
         <main>
             <section>
                 <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
+                    <!-- <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name"> -->
+                    <label for="newsarticle">Paste or write your text:</label>
+                    <textarea id="newsarticle" rows="11" columns="79">The Capture of Wakefield occurred during the First English Civil
+War when a Parliamentarian force attacked the Royalist garrison of Wakefield, Yorkshire.
+The Parliamentarians were outnumbered, having around 1,500 men under the command of Sir Thomas Fairfax, compared to the 3,000 led by George Goring in Wakefield. 
+Despite being outnumbered, Parliamentarians successfully stormed the town, taking roughly 1,400 prisoners.
+Around 800 Parliamentarians had been taken prisoner after being defeated at Seacroft Moor, 
+and Fairfax plotted the capture of Wakefield to take prisoners of his own to exchange for his men.
+He marched his force from Leeds and split it in two to attack from different directions.
+After around two hours of fighting early in the morning of 21 May, 1643, Fairfax broke through into Wakefield.
+Goring, who had been in bed suffering from either illness or a hangover,
+rose and led a counterattack in his nightshirt, but to no avail and the town was captured.
+Fairfax gained the prisoners he needed and much ammunition.
+According to his own account, the Parliamentarians lost no more than seven men.</textarea>
                     <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
                 </form>
             </section>
