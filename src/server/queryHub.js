@@ -5,7 +5,8 @@ const router = express.Router()
 // all subsequent routes here below entrypoint /sentiment
 
 router.get("/get", function (req,res) {
-    res.status('200').send(hubData)
+    let _results = {"txt": hubData.txt}
+    res.status('200').send( _results )
 })
 
 router.post("/submit", function (req,res) {
