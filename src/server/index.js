@@ -11,7 +11,8 @@ const app = express()
 hubData = {
     "version": "1.0",
     "txt": "empty",
-    "apikey": process.env.API_KEY
+    "apikey": process.env.API_KEY,
+    "lang": "en"
 }
 
 console.log(hubData)

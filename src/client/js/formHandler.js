@@ -4,7 +4,46 @@ function handleSubmit(event) {
     // check what text was put into the form field
     let formText = document.getElementById('newsarticle').value
 
-    const response = fetch("")
+    const uploadTxt = async ( url = '', data = {} ) => {
+      const request = fetch( url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      try { const status = (await request).json() 
+      return status;
+      } catch {
+        alert('upload error: ', error )
+      }
+    }
+
+    const queryWeb = async ( url = '' ) => {
+      return fetch(url, {
+          method: 'GET',
+      })
+      .catch ( error => console.error(error));
+  }
+    ( async () => 
+        {
+          await uploadTxt('/sentiment/submit', { txt: formText })
+          .then(
+            queryWeb( '/sentiment/get' )
+            .then ( data => data.json() )
+            .then (data => {
+              document.getElementById('results').innerHTML = data.txt
+            })
+          )
+          
+        })()
+
+}
+
+export { handleSubmit }
+
+/*     const response = fetch("/sentiment")
     .then(response => ({
       status: response.status, 
       body: response.json()
@@ -15,6 +54,4 @@ function handleSubmit(event) {
         }
     )
 
-    .catch(error => console.log('error', error));
-}
-export { handleSubmit }
+    .catch(error => console.log('error', error)); */

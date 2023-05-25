@@ -4,16 +4,16 @@ const router = express.Router()
 
 // all subsequent routes here below entrypoint /sentiment
 
-router.get("/", function (req,res) {
-    res.write("sentiment endpoint " + hubData.version )
-    res.write("\ntxt=" + hubData.txt )
-    res.write("\nAPIKey=" + hubData.apikey )
-    res.end()
+router.get("/get", function (req,res) {
+    res.status('200').send(hubData)
 })
 
-router.post("/", function (req,res) {
-    
+router.post("/submit", function (req,res) {
+    let _data = req.body
+    hubData.txt = _data.txt
+    console.log(hubData)
 })
+
 
 module.exports = router
 
