@@ -1,20 +1,26 @@
-const express = require("express")
-const router = express.Router()
 
+const express = require('express')
+const router = express.Router()
 
 // all subsequent routes here below entrypoint /sentiment
 
-router.get("/get", function (req,res) {
-    let _results = {"txt": hubData.txt}
-    res.status(200).send( _results )
-})
+
 
 router.post("/submit", function (req,res) {
     let _data = req.body
-    hubData.txt = _data.txt
-    console.log(hubData)
+    req.session.nlptext = _data.txt
+    res.status(202).send( { message : "OK" } )
 })
 
+router.get("/get", function (req,res) {
+    let _results = JSON.stringify({ txt: req.session.nlptext })
+    res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials" : true 
+    })
+    res.json(  { txt: req.session.nlptext } )
+})
 
 module.exports = router
 

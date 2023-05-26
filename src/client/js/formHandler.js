@@ -23,11 +23,13 @@ function handleSubmit(event) {
     const queryWeb = async ( url = '' ) => {
       return fetch(url, {
           method: 'GET',
+          credentials: 'same-origin'
       })
       .catch ( error => console.error(error));
   }
     ( async () => 
         {
+          //console.log('before upload')
           await uploadTxt('/sentiment/submit', { txt: formText })
           .then(
             queryWeb( '/sentiment/get' )
@@ -36,9 +38,7 @@ function handleSubmit(event) {
               document.getElementById('results').innerHTML = data.txt
             })
           )
-          
         })()
-
 }
 
 export { handleSubmit }
