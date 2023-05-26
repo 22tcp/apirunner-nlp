@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get("/get", function (req,res) {
     let _results = {"txt": hubData.txt}
-    res.status('200').send( _results )
+    res.status(200).send( _results )
 })
 
 router.post("/submit", function (req,res) {
