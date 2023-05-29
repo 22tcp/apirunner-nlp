@@ -21,7 +21,8 @@ function handleSubmit(event) {
       try { const status = (await request).json()
         document.getElementById('newsarticle').value = status.json()
         return status;
-      } catch { error => alert('upload error: ', error )
+      } 
+      catch { error => alert('upload error: ', error )
       }
     }
 
@@ -30,26 +31,25 @@ function handleSubmit(event) {
           method: 'GET',
           credentials: 'same-origin'
       })
-      .catch ( error => console.error(error));
+      .catch ( error => alert(`fetching ${url} failed: ` + error ));
   }
-    ( async () => 
-        {
-          //console.log('before upload')
-          await uploadTxt('/sentiment/submit', { "txt": formText })
-          .then(
-            await queryWeb( '/sentiment/get' )
-            .then ( data => data.json() )
-            .then (data => {
-              document.getElementById('agreement').innerHTML = data.agreement
-              document.getElementById('subjectivity').innerHTML = data.subjectivity
-              document.getElementById('irony').innerHTML = data.irony
-              document.getElementById('newsarticle').value = ''
-              document.getElementById('textlabel').innerHTML = 'Paste an article here:'
-              document.getElementById('excerpt').innerHTML = '...' + data.sentence_list[0].text.substring(3,150) + '...'
-              //console.log(data)
-            })
-          )
-        })()
+  return ( async () => 
+    {
+      await uploadTxt('/sentiment/submit', { "txt": formText })
+      .then(
+        await queryWeb( '/sentiment/get' )
+        .then ( data => data.json() )
+        .then (data => {
+          document.getElementById('agreement').innerHTML = data.agreement
+          document.getElementById('subjectivity').innerHTML = data.subjectivity
+          document.getElementById('irony').innerHTML = data.irony
+          document.getElementById('newsarticle').value = ''
+          document.getElementById('textlabel').innerHTML = 'Paste an article here:'
+          document.getElementById('excerpt').innerHTML = '...' + data.sentence_list[0].text.substring(3,150) + '...'
+          //console.log(data)
+        })
+      )
+    })()
 }
 
 export { handleSubmit }
