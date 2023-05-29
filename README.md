@@ -18,7 +18,7 @@ and run
 ```
 nvm use node 18 --lts
 ``` 
-
+to inflate node_modules and start node server
 ```
 npm install
 npm run build-prod && npm start
