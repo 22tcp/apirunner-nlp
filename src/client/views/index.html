@@ -8,11 +8,11 @@
     <body>
 
         <header>
-            <div class="">
-                Logo
+            <div>
+                Natural language processing AI API Interface
             </div>
-            <div class="">
-                navigation
+            <div>
+                <a href="https://meaningcloud.com/" target="_blank">Link to meaningcloud</a>
             </div>
         </header>
 
@@ -20,7 +20,7 @@
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
                     <!-- <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name"> -->
-                    <label for="newsarticle">Paste or write your text:</label>
+                    <label for="newsarticle">Paste over or use the example text:</label>
                     <textarea id="newsarticle" rows="11" columns="79">The Capture of Wakefield occurred during the First English Civil War
 when a Parliamentarian force attacked the Royalist garrison of Wakefield, Yorkshire.
 The Parliamentarians were outnumbered, having around 1,500 men under the command of Sir Thomas Fairfax, compared to the 3,000 led by George Goring in Wakefield. 
@@ -37,14 +37,15 @@ According to his own account, the Parliamentarians lost no more than seven men.<
                 </form>
             </section>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
+            <section class="sectiongrid">
+                <div class="section-header"><strong>Form Results</strong></div><div>API: Sentiment 2.1</div>
+                <div class="section-col">Subjectivity:</div><div class="section-col" id="subjectivity">-</div>
+                <div class="section-col">Text excerpt:</div><div class="section-col" id="excerpt">-</div>
             </section>
         </main>
 
         <footer>
-            <p>This is a footer</p>
+            <p>udacity project IV</p>
         </footer>
 
     </body>

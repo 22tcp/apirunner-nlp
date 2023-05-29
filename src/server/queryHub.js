@@ -6,7 +6,7 @@ const util = require('util')
 // all subsequent routes here below entrypoint /sentiment
 
 
-const _callHandler = async ( text, key ) => {
+/* const _callHandler = async ( text, key ) => {
 
     const _apirequest = new FormData()
     _apirequest.append("key", key )
@@ -26,7 +26,7 @@ const _callHandler = async ( text, key ) => {
     .catch ( error => { alert("error in api fetch:", error)})
     //console.log("APIREQ:", _apirequest , "\n")
     // console.dir("APICALL:" + util.inspect(_APICall, {showHidden: true, depth: null } ) )
-} 
+}  */
 
 router.post("/submit", function (req,res) {
     let _data = req.body
