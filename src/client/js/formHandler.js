@@ -32,26 +32,13 @@ function handleSubmit(event) {
           //console.log('before upload')
           await uploadTxt('/sentiment/submit', { txt: formText })
           .then(
-            queryWeb( '/sentiment/get' )
+            await queryWeb( '/sentiment/get' )
             .then ( data => data.json() )
             .then (data => {
-              document.getElementById('results').innerHTML = data.txt
+              document.getElementById('results').innerHTML = data.subjectivity
             })
           )
         })()
 }
 
 export { handleSubmit }
-
-/*     const response = fetch("/sentiment")
-    .then(response => ({
-      status: response.status, 
-      body: response.json()
-    }))
-    .then(({ status, body }) => {
-            console.log(status, body)
-            document.getElementById('results').innerHTML = response.body
-        }
-    )
-
-    .catch(error => console.log('error', error)); */
