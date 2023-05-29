@@ -12,10 +12,17 @@ dev and production builds with dev-webserver hot load.
 Credentials for the API are stored server-side only, makes use of the dotenv package.
 
 # how to run
+optional
+install nvm
+and run
+```
+nvm use node 18 --lts
+``` 
 
+```
 npm install
 npm run build-prod && npm start
-
+```
 Listens on *:8080
 
 
