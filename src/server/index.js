@@ -18,9 +18,10 @@ hubData = {
 }
 
 //console.log(hubData)
+//init session - resave must be true to store new user-specific texts each time those get submitted
 app.use(session( {
     secret: process.env.sessionkey,
-    resave: false,
+    resave: true,
     secure: false,
     saveUninitialized: true,
     name: 'apirunner-nlp',

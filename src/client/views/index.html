@@ -20,7 +20,7 @@
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
                     <!-- <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name"> -->
-                    <label for="newsarticle">Paste over or use the example text:</label>
+                    <label for="newsarticle" id="textlabel">Paste over or use the example text:</label>
                     <textarea id="newsarticle" rows="11" columns="79">The Capture of Wakefield occurred during the First English Civil War
 when a Parliamentarian force attacked the Royalist garrison of Wakefield, Yorkshire.
 The Parliamentarians were outnumbered, having around 1,500 men under the command of Sir Thomas Fairfax, compared to the 3,000 led by George Goring in Wakefield. 
@@ -45,16 +45,12 @@ According to his own account, the Parliamentarians lost no more than seven men.<
         </main>
 
         <footer>
-            <p>Evalute a News Article project showcase</p>
+            <p>Evaluate a News Article | example project showcase</p>
         </footer>
 <script>
 if ('serviceWorker' in navigator ) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').then(registration => {
-            console.log('SW registered: ', registration)
-        }).catch(registrationError => {
-            console.log('SW registration failed: ', registrationError)
-        })
+        navigator.serviceWorker.register('/service-worker.js')
     })
 }
 </script>
