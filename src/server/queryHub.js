@@ -5,40 +5,17 @@ const util = require('util')
 
 // all subsequent routes here below entrypoint /sentiment
 
-
-/* const _callHandler = async ( text, key ) => {
-
-    const _apirequest = new FormData()
-    _apirequest.append("key", key )
-    _apirequest.append("txt", text)
-    _apirequest.append("lang", "en")
-
-    const _APICall = {
-        method: "POST",
-        redirect: "follow",
-        credentials: "same-origin",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: _apirequest
-    }
-    return await fetch("https://api.meaningcloud.com/sentiment-2.1", _APICall )
-    .catch ( error => { alert("error in api fetch:", error)})
-    //console.log("APIREQ:", _apirequest , "\n")
-    // console.dir("APICALL:" + util.inspect(_APICall, {showHidden: true, depth: null } ) )
-}  */
-
 router.post("/submit", function (req,res) {
     let _data = req.body
-    req.session.nlptext = _data.txt
+    req.session.nlptext = JSON.stringify(_data.txt)
     res.status(202).send( { message : "OK" } )
 })
 
 router.get("/get",  function (req,res) {         
-        let _results = JSON.stringify({ txt: req.session.nlptext })
+        let _results = JSON.stringify(req.session.nlptext)
         const _apirequest = new FormData()
         _apirequest.append("key", process.env.API_KEY  )
-        _apirequest.append("txt", _results )
+        _apirequest.append( "txt", _results )
         _apirequest.append("lang", "en")
     
         const _APICall = {
@@ -59,6 +36,4 @@ router.get("/get",  function (req,res) {
         }
 })
 
-
 module.exports = router
-

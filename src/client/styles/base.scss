@@ -20,7 +20,7 @@ section {
 .sectiongrid {
     display: grid;
     grid-template-columns: 10pc 39pc;
-    grid-template-rows: 2em 17px  0.5fr;
+    grid-template-rows: 2em 17px 17px 17px 17px;
     grid-column-gap: 12px;
     grid-row-gap: 2em; 
 }
