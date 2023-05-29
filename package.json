@@ -9,7 +9,7 @@
     "build-dev": "webpack-dev-server  --config webpack.dev.js --open --hot"
   },
   "keywords": [],
-  "author": "Thorsten Schocke",
+  "author": "Thorsten",
   "license": "ISC",
   "description": "queries sentiment AI text analyer API and represents the response",
   "repository": {
@@ -29,7 +29,7 @@
     "uid-safe": "^2.1.5",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
-    "workbox-webpack-plugin": "^6.5.4"
+    "workbox-webpack-plugin": "^6.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
