@@ -33,7 +33,7 @@ function handleSubmit(event) {
       })
       .catch ( error => alert(`fetching ${url} failed: ` + error ));
   }
-  return ( async () => 
+  ( async () => 
     {
       await uploadTxt('/sentiment/submit', { "txt": formText })
       .then(

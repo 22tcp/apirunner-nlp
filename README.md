@@ -34,9 +34,9 @@ webserver starts and browser opens (tested on linux mint lts with ffox )
 Listens on *:8080
 
 
-THIS CODE WILL NOT RUN WITHOUT .env server side file!
-you need to add 2 lines in the file
-API_KEY=   enter your personal token from meaningcloud here
-sessionkey= some  sufficiently long string* for the browser session cookie encryption
-
- *for my app I used pwgen -c -n -s -B -v 32 1 
+THIS CODE WILL NOT RUN WITHOUT .env server side file!  
+you need to add 2 lines in the file  
+API_KEY=   enter your personal token from meaningcloud here  
+sessionkey= some  sufficiently long string* for the browser session cookie encryption  
+  
+ *for my app I used pwgen -c -n -s -B -v 32 1   
