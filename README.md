@@ -17,7 +17,8 @@ optional
 install nvm
 and run
 ```
-nvm use node 18 --lts
+nvm install --lts=hydrogen
+
 ``` 
 to inflate node_modules and start node server
 ```
