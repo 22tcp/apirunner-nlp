@@ -20,7 +20,7 @@ https://github.com/nvm-sh/nvm#install--update-script
   
 and run  
 ```
-nvm install --lts=hydrogen
+nvm install 18 --lts=hydrogen
 ``` 
 to inflate node_modules and start node server
 ```
