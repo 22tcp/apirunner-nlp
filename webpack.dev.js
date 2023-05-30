@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
+const WriteFilePlugin = require('write-file-webpack-plugin')
 
 module.exports = {
     entry: './src/client/index.js',
@@ -29,10 +31,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
-            filename: "./index.html",
-        }),
         new CleanWebpackPlugin({
             // Simulate the removal of files
             dry: true,
@@ -43,10 +41,14 @@ module.exports = {
             protectWebpackAssets: false
         }),
         new WorkboxPlugin.GenerateSW({
-            swDest: 'sw.js',
+            swDest: 'service-worker.js',
             clientsClaim: true,
             skipWaiting: true,
         }),
-        new WriteFilePlugin()
+        new WriteFilePlugin(),
+        new HtmlWebPackPlugin({
+            template: "./src/client/views/index.html",
+            filename: "./index.html",
+        })
     ]
 }
