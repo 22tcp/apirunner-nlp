@@ -32,7 +32,7 @@ dev mode
 ```
 npm run build-dev
 ```
-webserver starts and browser opens (tested on linux mint lts with ffox )
+when the dev webserver starts and the browser auto-opens it worked (tested on linux mint lts with ffox )
 
 Listens on *:8080
 
@@ -43,3 +43,7 @@ API_KEY=   enter your personal token from meaningcloud here
 sessionkey= some  sufficiently long string* for the browser session cookie encryption  
   
  *for my app I used pwgen -c -n -s -B -v 32 1   
+
+This project is not designed for production readiness, I took extra care of 
+some aspects but it would need way more sanitizing and filtering for the input data than
+I can provide in the time span given.  
