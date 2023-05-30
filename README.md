@@ -33,7 +33,7 @@ dev mode
 npm run build-dev
 ```
 when the dev webserver starts and the browser auto-opens it worked (tested on linux mint lts with ffox )
-Beware, the complete app needs a running node server -the webpack-dev-server can only simulate the client side.  
+Beware, the complete app needs a running node server -the webpack-dev-server can only simulate the client side delivery.
 
 Listens on *:8080
 
