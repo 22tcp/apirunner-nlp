@@ -48,3 +48,18 @@ sessionkey= some  sufficiently long string* for the browser session cookie encry
 This project is not designed for production readiness, I took extra care of 
 some aspects but it would need way more sanitizing and filtering for the input data than
 I can provide in the time span given.  
+-- 
+Note to the jest job
+: I am studying jest for three weeks now
+and still find it impossible to figure out how
+to chain the mock functions and if or if not I need to 
+import/mock the embedded helper functions for fetchting
+to and from my "API" Server.
+
+Every example I find is only a primitive function set with
+easy solvable testing which is simply not what I would need.
+
+I find the amount of material and methods of jest are a complete
+course in itself and shouldn't have been inserted as a "side note"
+in the project outliner. 
+
