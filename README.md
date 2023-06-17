@@ -50,16 +50,11 @@ some aspects but it would need way more sanitizing and filtering for the input d
 I can provide in the time span given.  
 -- 
 Note to the jest job
-: I am studying jest for three weeks now
-and still find it impossible to figure out how
-to chain the mock functions and if or if not I need to 
-import/mock the embedded helper functions for fetchting
-to and from my "API" Server.
+this should be part of the course material
+before the project runs,
+the documentation is not an answer to any actual
+question regarding my code
+the best information came from the udacity GPT, though,
+which I now will try to use and test my embedded fetch calls.
 
-Every example I find is only a primitive function set with
-easy solvable testing which is simply not what I would need.
-
-I find the amount of material and methods of jest are a complete
-course in itself and shouldn't have been inserted as a "side note"
-in the project outliner. 
 

@@ -1,5 +1,8 @@
+
 function handleSubmit(event) {
   event.preventDefault()
+
+
   
   // check what text was put into the form field, remove garbling
   let formText = document.getElementById('newsarticle').value.replace(/\n/g, "\ ")
@@ -41,10 +44,8 @@ function handleSubmit(event) {
       .then(
         await queryWeb( '/sentiment/get' )
         .then ( data => data.json() )
-        .then ( function(response) {
-          return response
-        })
         .then (data => {
+          
           document.getElementById('agreement').innerHTML = data.agreement
           document.getElementById('subjectivity').innerHTML = data.subjectivity
           document.getElementById('irony').innerHTML = data.irony
