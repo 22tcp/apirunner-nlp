@@ -1,16 +1,10 @@
-/**
- * @jest-environment jsdom
- */
-
 'use strict'
 
-const fs = require('fs');
-window.document.body.innerHTML = fs.readFileSync("src/client/views/index.html");
 import fetchMock from "jest-fetch-mock";
 import { queryWeb } from "../queryWeb";
 global.fetch = fetchMock;
  
-describe("catching the fetch", () => {
+describe("catches the queryWeb fetch", () => {
 
     beforeEach(() => { 
         fetchMock.mockResponseOnce(
@@ -23,7 +17,7 @@ describe("catching the fetch", () => {
                 "irony":"NONIRONIC",
                 "sentence_list": [ 
                     {
-                        "text":"The restaurant was great even though it’s not near Madrid.",
+                        "text":"The restaurant was great even though it’s not near Gallifrey.",
                         "inip":"0",
                         "endp":"57",
                         "bop":"y",
