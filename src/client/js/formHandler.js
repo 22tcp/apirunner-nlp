@@ -1,57 +1,33 @@
-function handleSubmit(event) {
-    event.preventDefault()
-
-    // check what text was put into the form field
-    let formText = document.getElementById('newsarticle').value
-
-    const uploadTxt = async ( url = '', data = {} ) => {
-      const request = fetch( url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      })
-      try { const status = (await request).json() 
-      return status;
-      } catch {
-        alert('upload error: ', error )
-      }
-    }
-
-    const queryWeb = async ( url = '' ) => {
-      return fetch(url, {
-          method: 'GET',
-      })
-      .catch ( error => console.error(error));
+import {queryWeb} from "./queryWeb.js"
+import {uploadTxt} from "./uploadTxt.js"
+async function handleSubmit(event) {
+  event.preventDefault()
+  
+  // check what text was put into the form field, remove garbling
+  let formText = document.getElementById('newsarticle').value.replace(/\n/g, "\ ")
+  if ( formText.length < 1  ) { 
+    alert('No data provided. Please enter at least some text')
+    return(0)
   }
-    ( async () => 
-        {
-          await uploadTxt('/sentiment/submit', { txt: formText })
-          .then(
-            queryWeb( '/sentiment/get' )
-            .then ( data => data.json() )
-            .then (data => {
-              document.getElementById('results').innerHTML = data.txt
-            })
-          )
-          
-        })()
 
+  // needs the ending ';' else webpack produces an error!!
+  document.getElementById('newsarticle').value='submitted';
+
+  await uploadTxt('/sentiment/submit', { "txt": formText })
+  .then(
+    await queryWeb( '/sentiment/get' )
+    .then ( data => data.json() )
+    .then (data => {   
+      document.getElementById('agreement').innerHTML = data.agreement
+      document.getElementById('subjectivity').innerHTML = data.subjectivity
+      document.getElementById('irony').innerHTML = data.irony
+      document.getElementById('newsarticle').value = ''
+      document.getElementById('textlabel').innerHTML = 'Paste an article here:'
+      document.getElementById('excerpt').innerHTML = '...' +
+      data.sentence_list[0].text.substring(3,150) + '...'
+      //console.log(data)
+    })
+  )
 }
 
 export { handleSubmit }
-
-/*     const response = fetch("/sentiment")
-    .then(response => ({
-      status: response.status, 
-      body: response.json()
-    }))
-    .then(({ status, body }) => {
-            console.log(status, body)
-            document.getElementById('results').innerHTML = response.body
-        }
-    )
-
-    .catch(error => console.log('error', error)); */

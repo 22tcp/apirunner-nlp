@@ -1,108 +1,82 @@
-# Project Instructions
+# Project
 
-This repo is your starter code for the project. It is the same as the starter code we began with in lesson 2. Install and configure Webpack just as we did in the course. Feel free to refer to the course repo as you build this one, and remember to make frequent commits and to create and merge branches as necessary!
+Evaluating a news article via natural language processing AI API sentiment 2.1 of meaningcloud.com  
 
-The goal of this project is to give you practice with:
-- Setting up Webpack
-- Sass styles
-- Webpack Loaders and Plugins
-- Creating layouts and page design
-- Service workers
-- Using APIs and creating requests to external urls
+The original example code used node 14 and the Aylien API SDK. These folks went payment only so meaningcloud it is.  
+For security reasons and in respect of interoperability this project currently runs with node v18.16.0
+instead.  
+I recommend using nvm to install and use node 18 LTS hydrogen, see below. 
 
-On top of that, I want to introduce you to the topic of Natural Language Processing. NLPs leverage machine learning and deep learning create a program that can interpret natural human speech. Systems like Alexa, Google Assistant, and many voice interaction programs are well known to us, but understanding human speech is an incredibly difficult task and requires a lot of resources to achieve. Full disclosure, this is the Wikipedia definition, but I found it to be a clear one:
+This minimal application features webpack, a serviceworker setup, and sessions to temporarily handle user specific requests for each user seperately  
+Credentials for the API are stored server-side only, makes use of the dotenv package.  
+development mode with dev-webserver hot load.  
+ 
 
-> Natural language processing (NLP) is a subfield of computer science, information engineering, and artificial intelligence
-concerned with the interactions between computers and human (natural) languages, in particular how to program computers to
-process and analyze large amounts of natural language data.
-
-You could spend years and get a masters degree focusing on the details of creating NLP systems and algorithms. Typically, NLP programs require far more resources than individuals have access to, but a fairly new API called Aylien has put a public facing API in front of their NLP system. We will use it in this project to determine various attributes of an article or blog post.
-
-## Getting started
-
-It would probably be good to first get your basic project setup and functioning. Follow the steps from the course up to Lesson 4 but don't add Service Workers just yet. We won't need the service workers during development and having extra caches floating around just means there's more potential for confusion. So, fork this repo and begin your project setup.
-
-Remember that once you clone, you will still need to install everything:
-
-`cd` into your new folder and run:
-- `npm install`
-
-## Setting up the API
-
-The Aylien API is perhaps different than what you've used before. It has you install a node module to run certain commands through, it will simplify the requests we need to make from our node/express backend.
-
-### Step 1: Signup for an API key
-First, you will need to go [here](https://developer.aylien.com/signup). Signing up will get you an API key. Don't worry, at the time of this course, the API is free to use up to 1000 requests per day or 333 intensive requests. It is free to check how many requests you have remaining for the day.
-
-### Step 2: Install the SDK
-Next you'll need to get the SDK. SDK stands for Software Development Kit, and SDKs are usually a program that brings together various tools to help you work with a specific technology. SDKs will be available for all the major languages and platforms, for instance the Aylien SDK brings together a bunch of tools and functions that will make it possible to interface with their API from our server and is available for Node, Python, PHP, Go, Ruby and many others. We are going to use the Node one, the page is available [here](https://docs.aylien.com/textapi/sdks/#sdks). You get 1000 free requests per day.
-
-### Step 3: Require the SDK package
-Install the SDK in your project and then we'll be ready to set up your server/index.js file.
-
-Your server index.js file must have these things:
-
-- [ ] Require the Aylien npm package
+# how to run
+optional  
+install nvm, use the original repository on github  
+  
+https://github.com/nvm-sh/nvm#install--update-script  
+  
+and run  
 ```
-var aylien = require("aylien_textapi");
+nvm install 18 --lts=hydrogen
+``` 
+to inflate node_modules and start node server
+```
+npm install
+npm run build-prod && npm start
 ```
 
-### Step 4: Environment Variables
-Next we need to declare our API keys, which will look something like this:
+dev mode 
 ```
-// set aylien API credentias
-var textapi = new aylien({
-  application_id: "your-api-id",
-  application_key: "your-key"
-});
+npm run build-dev
 ```
+when the dev webserver starts and the browser auto-opens it worked (tested on linux mint lts with ffox )
+Beware, the complete app needs a running node server -the webpack-dev-server can only simulate the client side delivery.
 
-...but there's a problem with this. We are about to put our personal API keys into a file, but when we push, this file is going to be available PUBLICLY on Github. Private keys, visible publicly are never a good thing. So, we have to figure out a way to make that not happen. The way we will do that is with environment variables. Environment variables are pretty much like normal variables in that they have a name and hold a value, but these variables only belong to your system and won't be visible when you push to a different environment like Github.
+Listens on *:8080
 
-- [ ] Use npm or yarn to install the dotenv package ```npm install dotenv```. This will allow us to use environment variables we set in a new file
-- [ ] Create a new ```.env``` file in the root of your project
-- [ ] Go to your .gitignore file and add ```.env``` - this will make sure that we don't push our environment variables to Github! If you forget this step, all of the work we did to protect our API keys was pointless.
-- [ ] Fill the .env file with your API keys like this:
-```
-API_ID=**************************
-API_KEY=**************************
-```
-- [ ] Add this code to the very top of your server/index.js file:
-```
-const dotenv = require('dotenv');
-dotenv.config();
-```
-- [ ] Reference variables you created in the .env file by putting ```process.env``` in front of it, an example might look like this:
-```
-console.log(`Your API key is ${process.env.API_KEY}`);
-```
-...Not that you would want to do that. This means that our updated API credential settings will look like this:
-```javascript
-// set aylien API credentials
-// NOTICE that textapi is the name I used, but it is arbitrary. 
-// You could call it aylienapi, nlp, or anything else, 
-//   just make sure to make that change universally!
-var textapi = new aylien({
-  application_id: process.env.API_ID,
-  application_key: process.env.API_KEY
-});
-```
 
-### Step 5: Using the API
+THIS CODE WILL NOT RUN WITHOUT .env server side file!  
+you need to add 2 lines in the file  
+API_KEY=   enter your personal token from meaningcloud here  
+sessionkey= some  sufficiently long string* for the browser session cookie encryption  
+  
+ *for my app I used pwgen -c -n -s -B -v 32 1   
 
-We're ready to go! The API has a lot of different endpoints you can take a look at [here](https://docs.aylien.com/textapi/endpoints/#api-endpoints). And you can see how using the SDK simplifies the requests we need to make. 
+This project is not designed for production readiness, I took extra care of 
+some aspects but it would need way more sanitizing and filtering for the input data than
+I can provide in the time span given.  
+-- 
+Note to jest testing demands
 
-I won't provide further examples here, as it's up to you to create the various requests and make sure your server is set up appropriately.
+Run tests with:  
+npm test -- --silent=false  
 
-## After the Aylien API
+to get some additional data into the console  
 
-Once you are hooked up to the Aylien API, you are most of the way there! Along with making sure you are following all the requirements in the project rubric in the classroom, here are a few other steps to make sure you take.
+! Working use cases should be part of the course material, not become injected into a project like a side note !
 
-- Parse the response body to dynamically fill content on the page.
-- Test that the server and form submission work, making sure to also handle error responses if the user input does not match API requirements.
-- Go back to the web pack config and add the setup for service workers. 
-- Test that the site is now available even when you stop your local server
+The documentation is not an answer to any actual question regarding more complex code the best information came from the udacity GPT, though,
+which I now will try to use and test my embedded fetch calls.
+Yet, not helpful or verbose enough to explain where in the tests things have to be placed to work. 
+I have refactored thrice, tried __mocks__ folders etc. to NO avail.
+Jest keeps on not finding things, I try to jsdom the central function and mock my minimalist fetch API, which is a headache. I have put three weeks (!) into this,  every night and beyond midnight.
+This is in not a reasonable effort / outcome relation, any documentation always revolves around  low complexity function setups,
+nowhere is an actual website frontend test explained. 
+I looked into other frontend testing but I always find "easy" function testing.
 
-## Deploying
+And the docs, where it would have counted, omitted any userspace use case and concentrated on mocking node_module functions, I am biting in my table here.  
+How can there be so much documentation without applicability?  
+Finally I had a breakthrough. By doing things that nobody did,  
+like it was implied that jest-fetch-mock just had to be initialised so-and-so  
+and in _truth_ I had to use it to mock the global.fetch - which someone else did    but not in a webpack project. Meaning a dumb global.fetch = fetchMock  
+did wonders to my tests, see queryWeb.test.js  
+Then there is documentation who try to use their own jest config files to globally enable some settings which horribly errors when following the official jest-fetch-mock initialisation tutorial in the github readme of the project. (Which has precedence in my eyes)
+ The init removes any extra files mentioned in package.json and then installs a global jest.config.js with a single huge module.exports config in it.
+reintroducing the config file ends with a "no double files please" error message from jest while the configuration implies an array for the file list!?
+The list of discrepancies between dozens of tutorials I checked (written ones and videos) and working configurations is discouraging.
 
-A great step to take with your finished project would be to deploy it! Unfortunately its a bit out of scope for me to explain too much about how to do that here, but checkout [Netlify](https://www.netlify.com/) or [Heroku](https://www.heroku.com/) for some really intuitive free hosting options.
+
+

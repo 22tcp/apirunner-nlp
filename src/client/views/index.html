@@ -8,11 +8,12 @@
     <body>
 
         <header>
-            <div class="">
-                Logo
+            <div>
+                Natural language processing AI API Interface sentiment 2.1<br>
+                ( fixed setting: english)
             </div>
-            <div class="">
-                navigation
+            <div>
+                <a href="https://meaningcloud.com/" target="_blank">Link to meaningcloud</a>
             </div>
         </header>
 
@@ -20,7 +21,7 @@
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
                     <!-- <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name"> -->
-                    <label for="newsarticle">Paste or write your text:</label>
+                    <label for="newsarticle" id="textlabel">Paste over or use the example text:</label>
                     <textarea id="newsarticle" rows="11" columns="79">The Capture of Wakefield occurred during the First English Civil War
 when a Parliamentarian force attacked the Royalist garrison of Wakefield, Yorkshire.
 The Parliamentarians were outnumbered, having around 1,500 men under the command of Sir Thomas Fairfax, compared to the 3,000 led by George Goring in Wakefield. 
@@ -28,24 +29,34 @@ Despite being outnumbered, Parliamentarians successfully stormed the town, takin
 Around 800 Parliamentarians had been taken prisoner after being defeated at Seacroft Moor, 
 and Fairfax plotted the capture of Wakefield to take prisoners of his own to exchange for his men.
 He marched his force from Leeds and split it in two to attack from different directions.
-After around two hours of fighting early in the morning of 21 May, 1643, Fairfax broke through into Wakefield.
+, 1643, Fairfax broke through into Wakefield.
 Goring, who had been in bed suffering from either illness or a hangover,
 rose and led a counterattack in his nightshirt, but to no avail and the town was captured.
 Fairfax gained the prisoners he needed and much ammunition.
 According to his own account, the Parliamentarians lost no more than seven men.</textarea>
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+                    <input type="submit" id="submittoapi" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             </section>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
+            <section class="sectiongrid">
+                <div class="section-header"><strong>Form Results</strong></div><div>API: Sentiment 2.1</div>
+                <div class="section-col">Agreement:</div><div class="section-col" id="agreement">-</div>
+                <div class="section-col">Subjectivity:</div><div class="section-col" id="subjectivity">-</div>
+                <div class="section-col">Irony:</div><div class="section-col" id="irony">-</div>
+                <div class="section-col">Text excerpt:</div><div class="section-col" id="excerpt">-</div>
             </section>
         </main>
 
         <footer>
-            <p>This is a footer</p>
+            <p>Evaluate a News Article | example project showcase</p>
         </footer>
+<script>
+if ('serviceWorker' in navigator ) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+    })
+}
+</script>
 
     </body>
 </html>
