@@ -11,7 +11,9 @@ This minimal application features webpack, a serviceworker setup, and sessions t
 Credentials for the API are stored server-side only, makes use of the dotenv package.  
 development mode with dev-webserver hot load.  
  
-
+!! ATTENTION - THE WEBPACK BUILD-TEST-MODE IS NOT STARTING THE LOCAL API SERVER IMPLEMENTED IN NODE EXPRESS - FETCH WONT WORK UNLESS THE SERVER IS STARTED, TOO !!    
+   
+  
 # how to run
 optional  
 install nvm, use the original repository on github  
